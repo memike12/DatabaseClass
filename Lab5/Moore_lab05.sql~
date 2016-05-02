@@ -1,0 +1,70 @@
+CREATE TABLE MODEL(
+       ModelName varchar(30) NOT NULL,
+       Length char(4),
+       Beam char(3),
+       Draft char(2),
+       Displacement char(10),
+       CruisingRange varchar(30),
+       MaxSpeed char(2),
+       MaxOccupancy varchar(30),
+       
+       CONSTRAINT PK_id PRIMARY KEY (ModelName)
+       ) ENGINE=InnoDB;
+
+CREATE TABLE BOAT(
+       HullNumber varchar(30) NOT NULL,
+       ModelName varchar(30) NULL,
+
+       CONSTRAINT PK_hull PRIMARY KEY (HullNumber),
+       CONSTRAINT FK_model FOREIGN KEY (ModelName)
+                  REFERENCES MODEL(ModelName)
+                  ON DELETE NO ACTION ON UPDATE CASCADE
+       ) ENGINE=InnoDB;
+
+CREATE TABLE CREW(
+       CrewNumber varchar(30) PRIMARY KEY,
+       CrewName varchar(30),
+       CrewMotto text,
+       HullNumber varchar(30) NULL,
+
+       CONSTRAINT FK_boat FOREIGN KEY (HullNumber)
+                  REFERENCES BOAT(HullNumber)
+                  ON DELETE NO ACTION ON UPDATE CASCADE
+        ) ENGINE=InnoDB;
+
+CREATE TABLE MIDSHIPMAN(
+       Alpha integer PRIMARY KEY,
+       LName char(30),
+       FName char(30),
+       Email char(50),
+       Phone varchar(30),
+       ClassYear integer(4),
+       isCommander boolean,
+       CrewNumber varchar(30) NULL,
+
+       CONSTRAINT FK_crew FOREIGN KEY (CrewNumber)
+                  REFERENCES CREW(CrewNumber)
+                  ON DELETE NO ACTION ON UPDATE CASCADE
+        ) ENGINE=InnoDB;
+
+CREATE TABLE COMMANDER(
+       Alpha int PRIMARY KEY,
+       PositionTitle char(30),
+
+       CONSTRAINT FK_alpha FOREIGN KEY (Alpha)
+                  REFERENCES MIDSHIPMAN(Alpha)
+                  ON DELETE NO ACTION ON UPDATE CASCADE
+       ) ENGINE=InnoDB;
+
+CREATE TABLE CRUISE(
+       StartTime time PRIMARY KEY,
+       StartDate date PRIMARY KEY,
+       CrewNumber varchar(30) PRIMARY KEY,
+       ReturnDate date,
+       ReturnTime time,
+       Destination varchar(30),
+
+       CONSTRAINT FK_crew FOREIGN KEY (CrewNumber)
+                  REFERENCES CREW(CrewNumber)
+                  ON DELETE NO ACTION ON UPDATE CASCADE
+       ) ENGINE=InnoDB;

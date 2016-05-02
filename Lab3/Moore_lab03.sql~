@@ -1,0 +1,80 @@
+--1
+CREATE TABLE `PerformanceTypes` (
+       `PerformanceTypeName` VARCHAR(45) NOT NULL,
+       PRIMARY KEY (`PerformanceTypeName`));
+
+CREATE TABLE `Performers` (
+       `PerformerID` INT NOT NULL,
+       `FirstName` VARCHAR(45) NULL,
+       `LastName` VARCHAR(45) NULL,
+       `Address` VARCHAR(60) NULL,
+       `PerformanceTypeName` VARCHAR(45) NOT NULL,
+       PRIMARY KEY (`PerformerID`));
+
+CREATE TABLE `Arenas` (
+       `ArenaID` INT NOT NULL,
+       `ArenaName` VARCHAR(45) NULL,
+       `City` VARCHAR(45) NULL,
+       `Capacity` INT NULL,
+       PRIMARY KEY (`ArenaID`));
+
+CREATE TABLE `Concerts` (
+       `PerformerID` INT NOT NULL,
+       `ArenaID` INT NOT NULL,
+       `ConcertDate` DATE NOT NULL,
+       CONSTRAINT `PK_id` PRIMARY KEY(`PerformerID`, `ArenaID`, `ConcertDate`),
+       CONSTRAINT `FK_id` FOREIGN KEY(`PerformerID`)
+                  REFERENCES Performers(PerformerID),
+       CONSTRAINT `FK2_id` FOREIGN KEY(`ArenaID`)
+                  REFERENCES Arenas(ArenaID)
+       );
+
+--2
+INSERT INTO PerformanceTypes (PerformanceTypeName)
+VALUES('singer');
+INSERT INTO PerformanceTypes (PerformanceTypeName)
+VALUES('dancer');
+INSERT INTO PerformanceTypes (PerformanceTypeName)
+VALUES('comedian');
+
+--3
+ALTER TABLE `Performers`
+ADD DateOfBirth DATE NULL;
+
+--4
+--a)
+INSERT INTO Performers(PerformerID, FirstName, LastName, Address, PerformanceTypeName, DateOfBirth)
+Values(1, 'John', 'Dow', 'Annapolis, MD', 'singer', NULL);
+--b)
+INSERT INTO Performers(PerformerID, FirstName, LastName, Address, PerformanceTypeName, DateOfBirth)
+Values(2, 'John', 'Doe', 'Annapolis, MD', 'painter', NULL);
+--My table accepted the row but if the database was working correctly and 
+--if I made the PerfromaceTypeName a foreign name into PerformanceTypes then
+--it would have not worked because painter isn't in that database yet
+--c)
+INSERT INTO Performers(PerformerID, FirstName, LastName, Address, PerformanceTypeName, DateOfBirth)
+Values(3, 'Matt', 'Smith', 'Baltimore, MD', 'dancer', NULL);
+INSERT INTO Performers(PerformerID, FirstName, LastName, Address, PerformanceTypeName, DateOfBirth)
+Values(4, 'Jane', 'Brown', 'New York, NY', 'dancer', NULL);
+INSERT INTO Performers(PerformerID, FirstName, LastName, Address, PerformanceTypeName, DateOfBirth)
+Values(5, 'Jennifer', 'Shade', 'Seattle, WA', 'dancer', NULL);
+
+--5
+UPDATE Performers SET DateOfBirth = '1990-03-02' WHERE PerformerID=1;
+
+--6
+--a)
+DELETE FROM Performers WHERE FirstName = 'Matt' AND LastName = 'Smith';
+--b)
+--My delete statement would remove all the rows with these constraints
+
+--7
+--a)
+DELETE FROM PerformanceTypes WHERE PerformanceTypeName = 'singer';
+--b)
+--It was in mine but if the foreign keys were working, then deleting the
+--singer would cause a dangling reference which shouldn't be allowed. 
+--c)
+DELETE FROM PerformanceTypes WHERE PerformanceTypeName = 'comedian';
+--It should be remoced because there aren't any references from other tables
+--to comedian.

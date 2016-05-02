@@ -1,0 +1,29 @@
+CREATE Table Item(
+       ItemID varchar(255) PRIMARY KEY,
+       Description varchar(255),
+       PurchaseDate varchar(255),
+       Store varchar(255),
+       City varchar(255),
+       Weight varchar(255),
+       PriceInLocalCurrency varchar(255),
+       ExchangeRate varchar(255)
+);
+
+CREATE Table Item(
+       ShipmentID varchar(255) PRIMARY KEY,
+       ShipperName varchar(255),
+       ShipperInvoiceNumber varchar(255),
+       DepartureDate varchar(255),
+       ArrivalDate varchar(255),
+       InsuredValue varchar(255)
+);
+
+CREATE Table SHIPPED_ITEM(
+       ShipmentID varchar(255),
+       ShipmentItemNb varchar(255),
+       ItemID varchar(255),
+       Value varchar(255),
+
+       CONSTRAINT pk_ShippedItem PRIMARY KEY (ShipmentID, ShipmentItemNb),
+       CONSTRAINT fk_item FOREIGN KEY ItemID
+) engine=InnoDB;
