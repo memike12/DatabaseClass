@@ -1,0 +1,9 @@
+Order: Tshirts=3, patches=5 total cost=99.75 
+Order: Tshirts=2, patches=6 total cost=94.5 
+Order: Tshirts=2, patches=9 total cost=126 
+Order: Tshirts=, patches= total cost=0 
+Order: Tshirts=, patches= total cost=0 
+Order: Tshirts=, patches= total cost=0 
+Order: Tshirts=, patches= total cost=0 
+Order: Tshirts=12, patches=3 total cost=220.5 
+Order: Tshirts=33, patches=44 total cost=981.75 

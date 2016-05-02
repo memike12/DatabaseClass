@@ -1,0 +1,27 @@
+<?php
+
+//return a string to display an array
+function displayArray($array){
+	$result = '<p>';
+	for($i = 0; $i < count($array); $i++){
+		$result .= "Element at index $i is $array[$i] <br />";
+	}
+	$result .= '</p>';
+
+	return $result;
+
+}
+
+//return a string to display an associative array
+function displayAssociativeArray($array){
+	$result = '<p>';
+	foreach($array as $product => $price){
+		$result .= "Element with key $product has value $price <br />";
+	}
+	$result .= '</p>';
+	return $result;
+	
+}
+
+
+?>

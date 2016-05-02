@@ -1,0 +1,28 @@
+<?php
+
+static function getAllProductsAsHTML(){
+       return "<h3>Online Store Order Form</h3>
+       <form action=\"processOrder.php\" method=\"post\">
+       <table border=\"1\">
+              <tr>
+                <td>Item</td>
+                <td>Quantity</td>
+              </tr>
+
+              <tr>
+                <td>Tee Shirts</td>
+                <td><input type=\"text\" name=\"quantity_1\" size=\"3\" maxlength=\"3\" /></td>
+              </tr>
+
+              <tr>
+                <td>Patches</td>
+                <td><input type=\"text\" name=\"quantity_2\" size=\"3\" maxlength=\"3\" /></td>
+              </tr>
+      </table>
+      <p><input type=\"submit\" value=\"Submit Order\" /></p>
+
+</form>";
+
+}
+
+?>

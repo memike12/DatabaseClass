@@ -1,0 +1,24 @@
+<?php
+//Michael Moore
+//164488
+//info on all products ordered
+
+class Order{
+$name;
+$quantity;
+
+
+public function __construct($title){
+       $this->name = $title;
+}
+
+public function __get($title){
+       
+}
+
+public function __set($title, $value){
+       
+}
+
+}
+?>

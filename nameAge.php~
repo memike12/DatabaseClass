@@ -1,0 +1,11 @@
+<?php 
+      class MyNewClass{
+            public $my_var_name;
+            public $my_var_age;
+            
+            public unction __construct() {}
+
+            public function __set($name, $value) {
+                   this ->$name = $value;
+                   }
+?>

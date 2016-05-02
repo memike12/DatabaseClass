@@ -1,0 +1,5 @@
+Order: Tshirts=23, patches=1 total cost=372.75 
+Order: Tshirts=, patches= total cost=0 
+Order: Tshirts=, patches= total cost=0 
+Order: Tshirts=, patches= total cost=0 
+Order: Tshirts=, patches= total cost=0 

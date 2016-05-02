@@ -1,0 +1,70 @@
+<?php
+require('page.inc.php');
+require('user.inc.php');
+require('myConnectDB.inc.php');
+
+session_start();
+
+//create a page object
+$page = new Page("IT360 login");
+$page->content = '';
+
+//connect to the database
+@$db = new myConnectDB();
+
+///check for errors
+$errno = mysqli_connect_errno();
+if ($errno){
+	$page->content = "<p>Error $errno while connecting to the database.". 
+		'Try back later or contact your system admin. The error message is: '.mysqli_connect_error(). '</p>';
+	$page->display();
+	return;
+}
+
+//process the  login
+if (isset($_POST['login'])) {
+	$user = new User($_POST['user_ID'], $_POST['password']);
+  $response = $user->validate($db);
+  if ($response){
+	//everything OK, set the session variable $_SESSION['name'] and go to songPage
+     $_SESSION['name'] = $_POST['user_ID'];
+     header("Location: songPage.php");
+  } 
+  else {
+	//user-password combination not valid - ask again
+     $page->content .=  "\n" . 'This is not a valid combination, try again.';
+  }
+  unset($_POST['login']);
+}
+
+//process the add user
+if (isset($_POST['addUser'])) {
+	$user = new User($_POST['user_ID'], $_POST['password']);
+  $response = $user->addUser($db);
+  if ($response){
+	//everything OK, set the session variable $_SESSION['name'] and go to songPage
+     $_SESSION['name'] = $_POST['user_ID'];
+     header("Location: songPage.php");
+  } 
+  else {
+	//user-password combination not valid - ask again
+     $page->content .=  "\n" . 'This is not a valid combination, try again.';
+  }
+  unset($_POST['login']);
+}
+
+
+//create a form to get user name and password
+$page->content .= '<h2>Authentication</h2>';
+$page->content .= '<form action="userPage.php" method="post">';
+$page->content .= '<p><label>Enter your user ID: <input type="text" name="user_ID"/></label></p>
+    <p><label>Enter your password: <input type="password" name="password"/></label></p>
+    <p><input type="submit" name = "login" value = "Login"/>
+<input type="submit" name="addUser" value="Add User"></p>
+    </form>';
+
+//display the page to the browser
+$page->display();
+?>
+
+

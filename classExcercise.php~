@@ -1,0 +1,5 @@
+SELECT midn.alpha,
+       concat(midn.first, ' ', midn.last) AS Name,
+       grades.Course,
+       grades.CourseGrade
+From midn LEFT JOIN grades USING(alpha);

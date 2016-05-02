@@ -1,0 +1,35 @@
+<?php
+
+        class Page{
+
+        //attributes
+        public $content;
+        private $title;
+
+        private $header = "<!DOCTYPE html>";
+
+        //constructor
+        public function __construct($title){
+        	$this->title = $title;
+        }
+
+        //set private attributes
+        public function __set($name, $value){
+               $this->$name = $value;
+        }
+
+        //display page
+        public function display(){
+	       echo $this->header;
+	       echo "<head><title> $this->title </title><meta charset='utf-8'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1'>
+                    <link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+                    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+                    <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+                    </head>";
+	       echo "<body>";
+	       echo $this->content;
+	       echo "</body></html>";
+               }
+       } //end class definition
+?>

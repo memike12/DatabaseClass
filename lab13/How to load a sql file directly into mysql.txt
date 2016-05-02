@@ -1,0 +1,1 @@
+mysql -h zee -u m16XXXX -pPASSWORD -f -c -v -n --table m16XXXX < *.sql
